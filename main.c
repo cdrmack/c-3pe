@@ -10,19 +10,20 @@ static void activate(GtkApplication *app, gpointer user_data)
     GtkWidget *window = gtk_application_window_new(app);
 
     gtk_window_set_title(GTK_WINDOW(window), "Window");
-    gtk_window_set_default_size(GTK_WINDOW(window), 800, 400);
+    gtk_window_set_default_size(GTK_WINDOW(window), 400, 200);
 
     GtkWidget *button = gtk_button_new_with_label("calculate");
     g_signal_connect(button, "clicked", G_CALLBACK(print_result), NULL);
 
-    GtkWidget *foo = gtk_label_new("foo");
-    GtkWidget *bar = gtk_label_new("bar");
-    GtkWidget *baz = gtk_label_new("baz");
+    GtkWidget *worst = gtk_label_new("worst");
+    GtkWidget *likely = gtk_label_new("likely");
+    GtkWidget *best = gtk_label_new("best");
 
     GtkWidget *h_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-    gtk_box_append(GTK_BOX(h_box), foo);
-    gtk_box_append(GTK_BOX(h_box), bar);
-    gtk_box_append(GTK_BOX(h_box), baz);
+    gtk_box_set_homogeneous(GTK_BOX(h_box), true);
+    gtk_box_append(GTK_BOX(h_box), worst);
+    gtk_box_append(GTK_BOX(h_box), likely);
+    gtk_box_append(GTK_BOX(h_box), best);
 
     GtkWidget *v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_box_append(GTK_BOX(v_box), h_box);
