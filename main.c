@@ -29,6 +29,11 @@ static void activate(GtkApplication *app, gpointer user_data)
     gtk_box_append(GTK_BOX(v_box), h_box);
     gtk_box_append(GTK_BOX(v_box), button);
 
+    gtk_widget_set_margin_start(v_box, 10);
+    gtk_widget_set_margin_end(v_box, 10);
+    gtk_widget_set_margin_top(v_box, 10);
+    gtk_widget_set_margin_bottom(v_box, 10);
+
     gtk_window_set_child(GTK_WINDOW(window), v_box);
     gtk_window_present(GTK_WINDOW(window));
 }
