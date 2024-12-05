@@ -5,6 +5,30 @@ static void print_result(GtkWidget *widget, gpointer data)
     g_print("button clicked");
 }
 
+static void create_labels(GtkWidget *labels_box)
+{
+    GtkWidget *worst = gtk_label_new("worst");
+    GtkWidget *likely = gtk_label_new("likely");
+    GtkWidget *best = gtk_label_new("best");
+
+    gtk_box_set_homogeneous(GTK_BOX(labels_box), true);
+    gtk_box_append(GTK_BOX(labels_box), worst);
+    gtk_box_append(GTK_BOX(labels_box), likely);
+    gtk_box_append(GTK_BOX(labels_box), best);
+}
+
+static void create_inputs(GtkWidget *input_box)
+{
+    GtkWidget *worst_input = gtk_entry_new();
+    GtkWidget *likely_input = gtk_entry_new();
+    GtkWidget *best_input = gtk_entry_new();
+
+    gtk_box_set_homogeneous(GTK_BOX(input_box), true);
+    gtk_box_append(GTK_BOX(input_box), worst_input);
+    gtk_box_append(GTK_BOX(input_box), likely_input);
+    gtk_box_append(GTK_BOX(input_box), best_input);
+}
+
 static void activate(GtkApplication *app, gpointer user_data)
 {
     GtkWidget *window = gtk_application_window_new(app);
@@ -12,25 +36,11 @@ static void activate(GtkApplication *app, gpointer user_data)
     gtk_window_set_title(GTK_WINDOW(window), "Window");
     gtk_window_set_default_size(GTK_WINDOW(window), 400, 200);
 
-    GtkWidget *worst = gtk_label_new("worst");
-    GtkWidget *likely = gtk_label_new("likely");
-    GtkWidget *best = gtk_label_new("best");
-
     GtkWidget *labels_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-    gtk_box_set_homogeneous(GTK_BOX(labels_box), true);
-    gtk_box_append(GTK_BOX(labels_box), worst);
-    gtk_box_append(GTK_BOX(labels_box), likely);
-    gtk_box_append(GTK_BOX(labels_box), best);
+    create_labels(labels_box);
 
-    GtkWidget *worst_input = gtk_entry_new();
-    GtkWidget *likely_input = gtk_entry_new();
-    GtkWidget *best_input = gtk_entry_new();
-
-    GtkWidget *input_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
-    gtk_box_set_homogeneous(GTK_BOX(input_box), true);
-    gtk_box_append(GTK_BOX(input_box), worst_input);
-    gtk_box_append(GTK_BOX(input_box), likely_input);
-    gtk_box_append(GTK_BOX(input_box), best_input);
+    GtkWidget *inputs_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+    create_inputs(inputs_box);
 
     GtkWidget *empty = gtk_label_new("");
 
@@ -39,7 +49,7 @@ static void activate(GtkApplication *app, gpointer user_data)
 
     GtkWidget *v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_box_append(GTK_BOX(v_box), labels_box);
-    gtk_box_append(GTK_BOX(v_box), input_box);
+    gtk_box_append(GTK_BOX(v_box), inputs_box);
     gtk_box_append(GTK_BOX(v_box), empty);
     gtk_box_append(GTK_BOX(v_box), button);
 
