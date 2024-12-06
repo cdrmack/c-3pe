@@ -21,7 +21,11 @@ typedef struct App
 
 static void print_result(GtkWidget *widget, gpointer data)
 {
-    g_print("button clicked");
+    g_print("button clicked\n");
+
+    GtkEntry *entry = GTK_ENTRY(data);
+    GtkEntryBuffer *buffer = gtk_entry_get_buffer(entry);
+    g_print("buffer %s\n", gtk_entry_buffer_get_text(buffer));
 }
 
 static void app_init(App *app)
@@ -36,7 +40,7 @@ static void app_init(App *app)
 
     app->calculate_button = gtk_button_new_with_label("calculate");
     g_signal_connect(app->calculate_button, "clicked", G_CALLBACK(print_result),
-                     NULL);
+                     app->worst_input);
 
     app->v_box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 }
