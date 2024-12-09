@@ -1,5 +1,5 @@
 EXE = c3pe
-SOURCES = main.c
+SOURCES = main.c tpeapp.c tpeappwin.c
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
 CPPFLAGS = `pkg-config --cflags gtk4`
