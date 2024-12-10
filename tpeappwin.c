@@ -10,9 +10,15 @@ struct _TpeAppWindow
 
 G_DEFINE_TYPE(TpeAppWindow, tpe_app_window, GTK_TYPE_APPLICATION_WINDOW);
 
-static void tpe_app_window_init(TpeAppWindow *win) {}
+static void tpe_app_window_init(TpeAppWindow *win)
+{
+    // TODO
+}
 
-static void tpe_app_window_class_init(TpeAppWindowClass *class) {}
+static void tpe_app_window_class_init(TpeAppWindowClass *class)
+{
+    // TODO
+}
 
 TpeAppWindow *tpe_app_window_new(TpeApp *app)
 {
