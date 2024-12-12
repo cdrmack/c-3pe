@@ -22,6 +22,9 @@ struct _TpeAppWindow
     // button
     GtkWidget *calculate_button;
 
+    // result
+    GtkWidget *result_label;
+
     // box
     GtkWidget *v_box;
 };
@@ -31,6 +34,18 @@ G_DEFINE_TYPE(TpeAppWindow, tpe_app_window, GTK_TYPE_APPLICATION_WINDOW);
 static void print_result(GtkWidget *widget, gpointer data)
 {
     g_print("button clicked\n");
+
+    TpeAppWindow *win = (TpeAppWindow *)data;
+    GtkEntry *worst = GTK_ENTRY(win->worst_input);
+    GtkEntryBuffer *worst_buffer = gtk_entry_get_buffer(worst);
+    g_print("worst: %s\n", gtk_entry_buffer_get_text(worst_buffer));
+
+    // TODO
+    // 1. convert string to ints
+    // 2. calculate TPE
+    // 3. display TPE
+
+    gtk_label_set_text(GTK_LABEL(win->result_label), "42");
 }
 
 static void tpe_app_window_init(TpeAppWindow *win)
@@ -70,11 +85,15 @@ static void tpe_app_window_init(TpeAppWindow *win)
     // button
     win->calculate_button = gtk_button_new_with_label("calculate");
     g_signal_connect(win->calculate_button, "clicked", G_CALLBACK(print_result),
-                     win->worst_input);
+                     win);
+
+    // result
+    win->result_label = gtk_label_new("");
 
     gtk_box_append(GTK_BOX(win->v_box), win->labels_box);
     gtk_box_append(GTK_BOX(win->v_box), win->inputs_box);
     gtk_box_append(GTK_BOX(win->v_box), win->calculate_button);
+    gtk_box_append(GTK_BOX(win->v_box), win->result_label);
 }
 
 static void tpe_app_window_class_init(TpeAppWindowClass *class) {}
