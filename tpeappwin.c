@@ -90,6 +90,13 @@ static void tpe_app_window_init(TpeAppWindow *win)
     // result
     win->result_label = gtk_label_new("");
 
+    PangoAttrList *attr_list = pango_attr_list_new();
+    PangoAttribute *attr = pango_attr_size_new(20 * PANGO_SCALE);
+    pango_attr_list_insert(attr_list, attr);
+
+    gtk_label_set_attributes(GTK_LABEL(win->result_label), attr_list);
+    pango_attr_list_unref(attr_list);
+
     gtk_box_append(GTK_BOX(win->v_box), win->labels_box);
     gtk_box_append(GTK_BOX(win->v_box), win->inputs_box);
     gtk_box_append(GTK_BOX(win->v_box), win->calculate_button);
