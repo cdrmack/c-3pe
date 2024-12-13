@@ -33,19 +33,38 @@ G_DEFINE_TYPE(TpeAppWindow, tpe_app_window, GTK_TYPE_APPLICATION_WINDOW);
 
 static void print_result(GtkWidget *widget, gpointer data)
 {
-    g_print("button clicked\n");
+    int worst_num = 0;
+    int likely_num = 0;
+    int best_num = 0;
 
     TpeAppWindow *win = (TpeAppWindow *)data;
-    GtkEntry *worst = GTK_ENTRY(win->worst_input);
-    GtkEntryBuffer *worst_buffer = gtk_entry_get_buffer(worst);
-    g_print("worst: %s\n", gtk_entry_buffer_get_text(worst_buffer));
 
-    // TODO
-    // 1. convert string to ints
-    // 2. calculate TPE
-    // 3. display TPE
+    {
+        GtkEntry *worst = GTK_ENTRY(win->worst_input);
+        GtkEntryBuffer *worst_buffer = gtk_entry_get_buffer(worst);
+        const char *text = gtk_entry_buffer_get_text(worst_buffer);
+        worst_num = atoi(text); // TODO, replace atoi with strtol
+    }
 
-    gtk_label_set_text(GTK_LABEL(win->result_label), "42");
+    {
+        GtkEntry *likely = GTK_ENTRY(win->likely_input);
+        GtkEntryBuffer *likely_buffer = gtk_entry_get_buffer(likely);
+        const char *text = gtk_entry_buffer_get_text(likely_buffer);
+        likely_num = atoi(text);
+    }
+
+    {
+        GtkEntry *best = GTK_ENTRY(win->best_input);
+        GtkEntryBuffer *best_buffer = gtk_entry_get_buffer(best);
+        const char *text = gtk_entry_buffer_get_text(best_buffer);
+        best_num = atoi(text);
+    }
+
+    int tpe = (worst_num + likely_num + best_num) / 3;
+    char buffer[20];
+
+    snprintf(buffer, sizeof(buffer), "%d", tpe);
+    gtk_label_set_text(GTK_LABEL(win->result_label), buffer);
 }
 
 static void tpe_app_window_init(TpeAppWindow *win)
