@@ -43,21 +43,24 @@ static void print_result(GtkWidget *widget, gpointer data)
         GtkEntry *worst = GTK_ENTRY(win->worst_input);
         GtkEntryBuffer *worst_buffer = gtk_entry_get_buffer(worst);
         const char *text = gtk_entry_buffer_get_text(worst_buffer);
-        worst_num = atoi(text); // TODO, replace atoi with strtol
+        char *endptr;
+        worst_num = strtol(text, &endptr, 10);
     }
 
     {
         GtkEntry *likely = GTK_ENTRY(win->likely_input);
         GtkEntryBuffer *likely_buffer = gtk_entry_get_buffer(likely);
         const char *text = gtk_entry_buffer_get_text(likely_buffer);
-        likely_num = atoi(text);
+        char *endptr;
+        likely_num = strtol(text, &endptr, 10);
     }
 
     {
         GtkEntry *best = GTK_ENTRY(win->best_input);
         GtkEntryBuffer *best_buffer = gtk_entry_get_buffer(best);
         const char *text = gtk_entry_buffer_get_text(best_buffer);
-        best_num = atoi(text);
+        char *endptr;
+        best_num = strtol(text, &endptr, 10);
     }
 
     int tpe = (worst_num + likely_num + best_num) / 3;
